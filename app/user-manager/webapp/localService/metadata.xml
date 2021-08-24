@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="userService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="User" EntityType="userService.User"/>
+                <FunctionImport Name="User_draftPrepare" EntitySet="User" ReturnType="userService.User" m:HttpMethod="POST" sap:action-for="userService.User">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <FunctionImport Name="User_draftActivate" EntitySet="User" ReturnType="userService.User" m:HttpMethod="POST" sap:action-for="userService.User">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="User_draftEdit" EntitySet="User" ReturnType="userService.User" m:HttpMethod="POST" sap:action-for="userService.User">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="PreserveChanges" Type="Edm.Boolean" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="Roles" EntityType="userService.Roles"/>
+                <EntitySet Name="User_project" EntityType="userService.User_project"/>
+                <FunctionImport Name="User_project_draftPrepare" EntitySet="User_project" ReturnType="userService.User_project" m:HttpMethod="POST" sap:action-for="userService.User_project">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="User_project_role" EntityType="userService.User_project_role"/>
+                <FunctionImport Name="User_project_role_draftPrepare" EntitySet="User_project_role" ReturnType="userService.User_project_role" m:HttpMethod="POST" sap:action-for="userService.User_project_role">
+                    <Parameter Name="ID" Type="Edm.Guid" Nullable="false" Mode="In"/>
+                    <Parameter Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" Mode="In"/>
+                    <Parameter Name="SideEffectsQualifier" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <EntitySet Name="DraftAdministrativeData" EntityType="userService.DraftAdministrativeData"/>
+                <EntitySet Name="Roles_texts" EntityType="userService.Roles_texts"/>
+                <AssociationSet Name="User_DraftAdministrativeData" Association="userService.User_DraftAdministrativeData">
+                    <End Role="User" EntitySet="User"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="User_SiblingEntity" Association="userService.User_SiblingEntity">
+                    <End Role="User" EntitySet="User"/>
+                    <End Role="User1" EntitySet="User"/>
+                </AssociationSet>
+                <AssociationSet Name="Roles_texts_1" Association="userService.Roles_texts_1">
+                    <End Role="Roles" EntitySet="Roles"/>
+                    <End Role="Roles_texts" EntitySet="Roles_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Roles_localized" Association="userService.Roles_localized">
+                    <End Role="Roles" EntitySet="Roles"/>
+                    <End Role="Roles_texts" EntitySet="Roles_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="User_project_User" Association="userService.User_project_User">
+                    <End Role="User_project" EntitySet="User_project"/>
+                    <End Role="User" EntitySet="User"/>
+                </AssociationSet>
+                <AssociationSet Name="User_project_DraftAdministrativeData" Association="userService.User_project_DraftAdministrativeData">
+                    <End Role="User_project" EntitySet="User_project"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="User_project_SiblingEntity" Association="userService.User_project_SiblingEntity">
+                    <End Role="User_project" EntitySet="User_project"/>
+                    <End Role="User_project1" EntitySet="User_project"/>
+                </AssociationSet>
+                <AssociationSet Name="User_project_role_User_project" Association="userService.User_project_role_User_project">
+                    <End Role="User_project_role" EntitySet="User_project_role"/>
+                    <End Role="User_project" EntitySet="User_project"/>
+                </AssociationSet>
+                <AssociationSet Name="User_project_role_role" Association="userService.User_project_role_role">
+                    <End Role="User_project_role" EntitySet="User_project_role"/>
+                    <End Role="Roles" EntitySet="Roles"/>
+                </AssociationSet>
+                <AssociationSet Name="User_project_role_DraftAdministrativeData" Association="userService.User_project_role_DraftAdministrativeData">
+                    <End Role="User_project_role" EntitySet="User_project_role"/>
+                    <End Role="DraftAdministrativeData" EntitySet="DraftAdministrativeData"/>
+                </AssociationSet>
+                <AssociationSet Name="User_project_role_SiblingEntity" Association="userService.User_project_role_SiblingEntity">
+                    <End Role="User_project_role" EntitySet="User_project_role"/>
+                    <End Role="User_project_role1" EntitySet="User_project_role"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="User">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="projects" Relationship="userService.User_project_User" FromRole="User" ToRole="User_project"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="userService.User_DraftAdministrativeData" FromRole="User" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="userService.User_SiblingEntity" FromRole="User" ToRole="User1"/>
+            </EntityType>
+            <EntityType Name="Roles">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <NavigationProperty Name="texts" Relationship="userService.Roles_texts_1" FromRole="Roles" ToRole="Roles_texts"/>
+                <NavigationProperty Name="localized" Relationship="userService.Roles_localized" FromRole="Roles" ToRole="Roles_texts"/>
+            </EntityType>
+            <EntityType Name="User_project">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <NavigationProperty Name="roles" Relationship="userService.User_project_role_User_project" FromRole="User_project" ToRole="User_project_role"/>
+                <NavigationProperty Name="User" Relationship="userService.User_project_User" FromRole="User_project" ToRole="User"/>
+                <Property Name="User_ID" Type="Edm.Guid"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="userService.User_project_DraftAdministrativeData" FromRole="User_project" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="userService.User_project_SiblingEntity" FromRole="User_project" ToRole="User_project1"/>
+            </EntityType>
+            <EntityType Name="User_project_role">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="User_project" Relationship="userService.User_project_role_User_project" FromRole="User_project_role" ToRole="User_project"/>
+                <Property Name="User_project_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="role" Relationship="userService.User_project_role_role" FromRole="User_project_role" ToRole="Roles"/>
+                <Property Name="role_code" Type="Edm.String" MaxLength="4"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Relationship="userService.User_project_role_DraftAdministrativeData" FromRole="User_project_role" ToRole="DraftAdministrativeData"/>
+                <Property Name="DraftAdministrativeData_DraftUUID" Type="Edm.Guid"/>
+                <NavigationProperty Name="SiblingEntity" Relationship="userService.User_project_role_SiblingEntity" FromRole="User_project_role" ToRole="User_project_role1"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="Roles_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="4" Nullable="false"/>
+            </EntityType>
+            <Association Name="User_DraftAdministrativeData">
+                <End Role="User" Type="userService.User" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="userService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="User">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="User_SiblingEntity">
+                <End Role="User" Type="userService.User" Multiplicity="*"/>
+                <End Role="User1" Type="userService.User" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="Roles_texts_1">
+                <End Role="Roles" Type="userService.Roles" Multiplicity="1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Role="Roles_texts" Type="userService.Roles_texts" Multiplicity="*"/>
+            </Association>
+            <Association Name="Roles_localized">
+                <End Role="Roles" Type="userService.Roles" Multiplicity="*"/>
+                <End Role="Roles_texts" Type="userService.Roles_texts" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="User_project_User">
+                <End Role="User_project" Type="userService.User_project" Multiplicity="*"/>
+                <End Role="User" Type="userService.User" Multiplicity="0..1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="User_project_DraftAdministrativeData">
+                <End Role="User_project" Type="userService.User_project" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="userService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="User_project">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="User_project_SiblingEntity">
+                <End Role="User_project" Type="userService.User_project" Multiplicity="*"/>
+                <End Role="User_project1" Type="userService.User_project" Multiplicity="0..1"/>
+            </Association>
+            <Association Name="User_project_role_User_project">
+                <End Role="User_project_role" Type="userService.User_project_role" Multiplicity="*"/>
+                <End Role="User_project" Type="userService.User_project" Multiplicity="0..1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="User_project_role_role">
+                <End Role="User_project_role" Type="userService.User_project_role" Multiplicity="*"/>
+                <End Role="Roles" Type="userService.Roles" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Roles">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="User_project_role">
+                        <PropertyRef Name="role_code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="User_project_role_DraftAdministrativeData">
+                <End Role="User_project_role" Type="userService.User_project_role" Multiplicity="*"/>
+                <End Role="DraftAdministrativeData" Type="userService.DraftAdministrativeData" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="DraftAdministrativeData">
+                        <PropertyRef Name="DraftUUID"/>
+                    </Principal>
+                    <Dependent Role="User_project_role">
+                        <PropertyRef Name="DraftAdministrativeData_DraftUUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="User_project_role_SiblingEntity">
+                <End Role="User_project_role" Type="userService.User_project_role" Multiplicity="*"/>
+                <End Role="User_project_role1" Type="userService.User_project_role" Multiplicity="0..1"/>
+            </Association>
+            <Annotations Target="userService.User" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>name</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="User"/>
+                        <PropertyValue Property="TypeNamePlural" String="Users"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="name"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Projects"/>
+                            <PropertyValue Property="Target" AnnotationPath="projects/@UI.LineItem"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="userService.EntityContainer/User" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="userService.EntityContainer/User_draftActivate"/>
+                        <PropertyValue Property="EditAction" String="userService.EntityContainer/User_draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="userService.EntityContainer/User_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="userService.User/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.Roles" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="userService.Roles/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="userService.Roles/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="userService.User_project" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="roles"/>
+                            <PropertyValue Property="Value" Path="roles/role_code"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="userService.EntityContainer/User_project" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="userService.EntityContainer/User_project_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="userService.User_project/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User_project/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User_project/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User_project/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User_project/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.EntityContainer/User_project_role" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.DraftNode">
+                    <Record Type="Common.DraftNodeType">
+                        <PropertyValue Property="PreparationAction" String="userService.EntityContainer/User_project_role_draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="userService.User_project_role/role_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Roles"/>
+                        <PropertyValue Property="CollectionPath" String="Roles"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="role_code"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="userService.User_project_role/IsActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User_project_role/HasActiveEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User_project_role/HasDraftEntity" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User_project_role/DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.User_project_role/DraftAdministrativeData_DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="userService.DraftAdministrativeData" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Administrative Data"/>
+            </Annotations>
+            <Annotations Target="userService.DraftAdministrativeData/DraftUUID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft (Technical ID)"/>
+            </Annotations>
+            <Annotations Target="userService.DraftAdministrativeData/CreationDateTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Created On"/>
+            </Annotations>
+            <Annotations Target="userService.DraftAdministrativeData/CreatedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Created By"/>
+            </Annotations>
+            <Annotations Target="userService.DraftAdministrativeData/DraftIsCreatedByMe" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft Created By Me"/>
+            </Annotations>
+            <Annotations Target="userService.DraftAdministrativeData/LastChangeDateTime" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="userService.DraftAdministrativeData/LastChangedByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft Last Changed By"/>
+            </Annotations>
+            <Annotations Target="userService.DraftAdministrativeData/InProcessByUser" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Draft In Process By"/>
+            </Annotations>
+            <Annotations Target="userService.DraftAdministrativeData/DraftIsProcessedByMe" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+                <Annotation Term="Common.Label" String="Draft In Process By Me"/>
+            </Annotations>
+            <Annotations Target="userService.Roles_texts/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="userService.Roles_texts/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -6,12 +6,16 @@ entity User {
     key ID: UUID;
     name: String;
 
+    role: Association to Role;
+
     projects : Composition of many User_project on projects.User = $self;
 }
 
 entity User_project {
     key ID: UUID;
     name: String;
+
+    role: Association to Role;
 
     roles: Composition of many User_project_role on roles.User_project = $self;
 
@@ -25,6 +29,6 @@ entity User_project_role {
     role: Association to Role;
 }
 
-entity Role : sap.common.CodeList {
+entity Role: sap.common.CodeList {
     key code : String(4);
 }

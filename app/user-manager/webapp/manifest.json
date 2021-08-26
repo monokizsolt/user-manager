@@ -180,20 +180,12 @@
                                     "projects::com.sap.vocabularies.UI.v1.LineItem": {
                                         "navigationProperty": "projects",
                                         "entitySet": "User_project",
-                                        "createMode": "inline"
+                                        "createMode": "inline",
+                                        "disableDefaultInlineCreateSort":true
                                     }
                                 }
                             }
-                        },
-                        "pages": [
-                            {
-                                "navigationProperty": "projects",
-                                "entitySet": "User_project",
-                                "component": {
-                                    "name": "sap.suite.ui.generic.template.ObjectPage"
-                                }
-                            }
-                        ]
+                        }
                     }
                 }
             }

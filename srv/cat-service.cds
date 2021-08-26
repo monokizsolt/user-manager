@@ -4,6 +4,4 @@ service userService {
 
     @odata.draft.enabled
     entity User as projection on model.User;
-
-    entity Roles as projection on model.Role;
 }
